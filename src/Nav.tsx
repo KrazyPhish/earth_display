@@ -44,7 +44,7 @@ const Nav: FC = () => {
               })}
             </Menu>
           </Sider>
-          <Content className={["w-full", "h-full"]}>
+          <Content className={["w-full", "h-full", "relative"]}>
             <Outlet />
           </Content>
         </Layout>

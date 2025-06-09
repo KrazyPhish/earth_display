@@ -48,6 +48,15 @@ export const routes: ExternalRouteObject[] = [
           Component: (await import("./components/camera/Navigation")).default,
         }),
       },
+      {
+        parentName: parents.camera.title,
+        navName: "实 时 坐 标",
+        keyName: "2",
+        path: "coordinate",
+        lazy: async () => ({
+          Component: (await import("./components/camera/Coordinate")).default,
+        }),
+      },
     ],
   },
 ]
