@@ -57,6 +57,15 @@ export const routes: ExternalRouteObject[] = [
           Component: (await import("./components/camera/Coordinate")).default,
         }),
       },
+      {
+        parentName: parents.camera.title,
+        navName: "第 一 人 称 视 角",
+        keyName: "3",
+        path: "firstPersonView",
+        lazy: async () => ({
+          Component: (await import("./components/camera/FirstPersonView")).default,
+        }),
+      },
     ],
   },
 ]

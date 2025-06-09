@@ -1,6 +1,6 @@
 import { initMap, loadProvider } from "@/tools"
 import { Earth, Geographic, useEarthRecycle, Utils } from "@anstec/earth"
-import { Card, Typography } from "@arco-design/web-react"
+import { Typography } from "@arco-design/web-react"
 import { Cartesian3, JulianDate, ScreenSpaceEventHandler, ScreenSpaceEventType } from "cesium"
 import { useEffect, useRef, useState, type FC } from "react"
 
@@ -29,7 +29,7 @@ const registerTimeTick = (earth: Earth, callback: (time: string) => void) => {
 }
 
 const Coordinate: FC = () => {
-  let earth: Earth
+  const earthRef = useRef<Earth | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const [coord, setCoord] = useState({ longitude: "", latitude: "" })
   const [time, setTime] = useState("")
@@ -42,10 +42,10 @@ const Coordinate: FC = () => {
   }
 
   useEffect(() => {
-    earth = initMap("coordinate", containerRef.current!)
-    loadProvider(earth)
-    const disposeCoor = registerCoordinate(earth, refreshCoord)
-    const disposeTick = registerTimeTick(earth, setTime)
+    earthRef.current = initMap("coordinate", containerRef.current!)
+    loadProvider(earthRef.current)
+    const disposeCoor = registerCoordinate(earthRef.current, refreshCoord)
+    const disposeTick = registerTimeTick(earthRef.current, setTime)
 
     return () => {
       disposeCoor()

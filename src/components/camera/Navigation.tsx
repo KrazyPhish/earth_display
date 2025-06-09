@@ -7,13 +7,13 @@ const init = (earth: Earth) => {
 }
 
 const Navigation: FC = () => {
-  let earth: Earth
+  const earthRef = useRef<Earth | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    earth = initMap("rotate", containerRef.current!)
-    loadProvider(earth)
-    init(earth)
+    earthRef.current = initMap("rotate", containerRef.current!)
+    loadProvider(earthRef.current)
+    init(earthRef.current)
     return () => {
       useEarthRecycle("rotate")
     }
